@@ -102,15 +102,9 @@ Window {
                     topMargin: 10
                     leftMargin: 6
                 }
-//                signal button
                 onClicked: {
-                    console.log(newNamesInput.getText(0, 50))
-                    type_model.add(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
-                    console.log("rowCount(): " + type_model.rowCount())
-                    console.log("count: " + type_model.count())
-//                    submitButton.button()
+                    type_model.insertDataStructure(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
                 }
-//                onButton: namesListView.forceLayout()
             }
         }
 
@@ -157,7 +151,7 @@ Window {
                 ListView {
                     id: namesListView
                     anchors.fill: parent
-                    model: type_model
+                    model: type_model.typeListModel
                     delegate: namesComponent
                     clip: true
                 }
@@ -198,7 +192,7 @@ Window {
                         bottomMargin: 3
                     }
 //                    model: MyDescriptionsList {}
-                    model: type_model
+                    model: type_model.typeListModel
                     delegate: descriptionComponent
                     clip: true
                 }

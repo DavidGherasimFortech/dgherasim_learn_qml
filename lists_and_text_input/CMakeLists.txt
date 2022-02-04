@@ -20,6 +20,10 @@ set(PROJECT_SOURCES
         typelistmodel.h
         datastructure.h
         datastructure.cpp
+        typelistmodelmanager.h
+        typelistmodelmanager.cpp
+        typelistmodelproxy.h
+        typelistmodelproxy.cpp
         qml.qrc
 )
 

@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MyNamesList.qml</file>
-        <file>MyDescriptionsList.qml</file>
     </qresource>
 </RCC>

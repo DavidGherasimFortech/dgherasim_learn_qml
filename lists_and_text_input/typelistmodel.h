@@ -2,6 +2,8 @@
 #define TYPELISTMODEL_H
 //-------------------------------------------------------------------------------------------------
 #include <QAbstractListModel>
+#include <QObject>
+
 #include "datastructure.h"
 //-------------------------------------------------------------------------------------------------
 namespace listandtextinput
@@ -10,7 +12,6 @@ class DataStructure;
 //-------------------------------------------------------------------------------------------------
 class TypeListModel : public QAbstractListModel
 {
-    Q_OBJECT
 public:
     enum DataStructureRoles
     {
@@ -22,8 +23,8 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
-    Q_INVOKABLE int count() const;
-    Q_INVOKABLE void add(QString name, QString description);
+    void add(QString name, QString description);
+    void update();
 private:
     QList<DataStructure> p_types;
 };

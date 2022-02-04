@@ -49,14 +49,15 @@ QHash<int,QByteArray> TypeListModel::roleNames() const
     return mapping;
 }
 //-------------------------------------------------------------------------------------------------
-int TypeListModel::count() const
-{
-    return p_types.count();
-}
-//-------------------------------------------------------------------------------------------------
 void TypeListModel::add(QString name, QString description)
 {
-    DataStructure newObj = DataStructure(name, description);
-    p_types.push_back(newObj);
+    p_types.prepend(DataStructure(name, description));
+}
+//-------------------------------------------------------------------------------------------------
+void TypeListModel::update()
+{
+    beginResetModel();
+
+    endResetModel();
 }
 //-------------------------------------------------------------------------------------------------
