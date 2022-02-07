@@ -5,7 +5,6 @@
 #include <QAbstractListModel>
 
 #include "typelistmodel.h"
-#include "typelistmodelproxy.h"
 //-------------------------------------------------------------------------------------------------
 namespace listandtextinput
 {
@@ -17,7 +16,6 @@ class TypeListModelManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QAbstractListModel* typeListModel READ typeListModel CONSTANT)
-    Q_PROPERTY(QAbstractItemModel* typeListModelProxy READ typeListModelProxy CONSTANT)
 public:
     explicit TypeListModelManager(QObject *parent = nullptr);
     ~TypeListModelManager();
@@ -29,10 +27,8 @@ public:
     };
     void updateTypeListModel();
     QAbstractListModel *typeListModel() const;
-    QAbstractProxyModel *typeListModelProxy() const;
 private:
     TypeListModel *m_typeListModel;
-    TypeListModelProxy *m_typeListModelProxy;
 };
 //-------------------------------------------------------------------------------------------------
 } // namespace listandtextinput

@@ -51,7 +51,7 @@ QHash<int,QByteArray> TypeListModel::roleNames() const
 //-------------------------------------------------------------------------------------------------
 void TypeListModel::add(QString name, QString description)
 {
-    p_types.prepend(DataStructure(name, description));
+    p_types.push_back(DataStructure(name, description));
 }
 //-------------------------------------------------------------------------------------------------
 void TypeListModel::update()

@@ -191,7 +191,6 @@ Window {
                         topMargin: 3
                         bottomMargin: 3
                     }
-//                    model: MyDescriptionsList {}
                     model: type_model.typeListModel
                     delegate: descriptionComponent
                     clip: true

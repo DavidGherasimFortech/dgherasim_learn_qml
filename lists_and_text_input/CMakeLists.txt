@@ -22,8 +22,6 @@ set(PROJECT_SOURCES
         datastructure.cpp
         typelistmodelmanager.h
         typelistmodelmanager.cpp
-        typelistmodelproxy.h
-        typelistmodelproxy.cpp
         qml.qrc
 )
 
