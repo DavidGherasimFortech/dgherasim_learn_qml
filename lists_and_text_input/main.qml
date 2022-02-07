@@ -106,6 +106,23 @@ Window {
                     type_model.insertDataStructure(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
                 }
             }
+
+            Button {
+                id: clearButton
+                text: "Delete element"
+                font.pixelSize: 15
+                height: 25
+                highlighted: true
+                anchors {
+                    left: submitButton.right
+                    top: newDescInput.bottom
+                    topMargin: 10
+                    leftMargin: 6
+                }
+                onClicked: {
+                    type_model.deleteDataStructure(newNamesInput.getText(0, 50))
+                }
+            }
         }
 
         RowLayout {

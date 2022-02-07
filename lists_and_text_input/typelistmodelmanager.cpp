@@ -25,6 +25,12 @@ void TypeListModelManager::insertDataStructure(QString name, QString description
     updateTypeListModel();
 }
 //-------------------------------------------------------------------------------------------------
+void TypeListModelManager::deleteDataStructure(QString name)
+{
+    m_typeListModel->deleteElement(name);
+    updateTypeListModel();
+}
+//-------------------------------------------------------------------------------------------------
 void TypeListModelManager::updateTypeListModel()
 {
     m_typeListModel->update();

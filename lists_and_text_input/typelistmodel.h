@@ -24,6 +24,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
     void add(QString name, QString description);
+    void deleteElement(QString name);
+    DataStructure at(const int index);
     void update();
 private:
     QList<DataStructure> p_types;

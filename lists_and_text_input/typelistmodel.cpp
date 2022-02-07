@@ -26,8 +26,7 @@ QVariant TypeListModel::data(const QModelIndex &index, int role) const
     {
         return QVariant();
     }
-//    const DataStructure &data = p_types.at(index.row());
-    const DataStructure &data = p_types[index.row()];
+    const DataStructure &data = p_types.at(index.row());
     switch (role)
     {
     case NameRole:
@@ -54,10 +53,29 @@ void TypeListModel::add(QString name, QString description)
     p_types.push_back(DataStructure(name, description));
 }
 //-------------------------------------------------------------------------------------------------
+void TypeListModel::deleteElement(QString name)
+{
+    for(int i = 0; i < p_types.size(); i++)
+    {
+        if(p_types[i].name() == name )
+        {
+            p_types.removeAt(i);
+        }
+    }
+}
+//-------------------------------------------------------------------------------------------------
+DataStructure TypeListModel::at(const int index)
+{
+    if((index < 0) || (index > p_types.size()))
+    {
+        return DataStructure(QString(), QString());
+    }
+    return p_types.at(index);
+}
+//-------------------------------------------------------------------------------------------------
 void TypeListModel::update()
 {
     beginResetModel();
-
     endResetModel();
 }
 //-------------------------------------------------------------------------------------------------

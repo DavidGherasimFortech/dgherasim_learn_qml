@@ -20,6 +20,7 @@ public:
     explicit TypeListModelManager(QObject *parent = nullptr);
     ~TypeListModelManager();
     Q_INVOKABLE void insertDataStructure(QString name, QString description);
+    Q_INVOKABLE void deleteDataStructure(QString name);
     enum DataStructureRoles
     {
         NameRole = Qt::UserRole,
