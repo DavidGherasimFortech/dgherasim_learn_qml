@@ -103,7 +103,13 @@ Window {
                     leftMargin: 6
                 }
                 onClicked: {
-                    type_model.insertDataStructure(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
+                    if(newNamesInput.length === 0 || newDescInput.length === 0) {
+                    }
+                    else {
+                        type_model.insertDataStructure(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
+                        newNamesInput.clear()
+                        newDescInput.clear()
+                    }
                 }
             }
 
@@ -131,8 +137,10 @@ Window {
             width: parent.width
             spacing: 0
             Rectangle {
+                id: leftRectangle
                 Layout.preferredHeight: parent.height
                 Layout.preferredWidth: parent.width / 2
+                clip: true
                 border {
                     color: "black"
                     width: 3
@@ -161,7 +169,25 @@ Window {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: namesListView.currentIndex = model.index
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
+                            onClicked: {
+                                if (mouse.button === Qt.LeftButton) {
+                                    namesListView.currentIndex = model.index
+                                }
+                                else if (mouse.button === Qt.RightButton) {
+                                    namesListView.currentIndex = model.index
+                                    menu.popup()
+                                }
+                            }
+                            Menu {
+                                id: menu
+                                MenuItem {
+                                    text: "Delete element"
+                                    onTriggered: {
+                                        type_model.deleteDataStructure(model.name, model.description)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -171,6 +197,12 @@ Window {
                     model: type_model.typeListModel
                     delegate: namesComponent
                     clip: true
+                    ScrollBar.vertical: ScrollBar {
+                        id: leftScrollBar
+                        policy: ScrollBar.AlwaysOn
+                        minimumSize: 0.2
+                        size: 1
+                    }
                 }
             }
             Rectangle {
