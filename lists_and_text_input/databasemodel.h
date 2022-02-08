@@ -1,24 +1,34 @@
-#ifndef DATASTRUCTURE_H
-#define DATASTRUCTURE_H
+#ifndef DATABASEMODEL_H
+#define DATABASEMODEL_H
 //-------------------------------------------------------------------------------------------------
 #include <QString>
-#include <QAbstractListModel>
+#include <QtSql/QSqlDatabase>
+#include <QDir>
+#include <QtSql/QSqlQuery>
+
+#include "datastructure.h"
 //-------------------------------------------------------------------------------------------------
 namespace listandtextinput
 {
 //-------------------------------------------------------------------------------------------------
-class DataStructure
+class DatabaseModel : public QObject
 {
+    Q_OBJECT
 public:
-    DataStructure() = delete;
-    DataStructure(QString name, QString description);
-    QString name() const;
-    QString description() const;
+    DatabaseModel() = delete;
+    DatabaseModel(QString dbDir, QString dbName);
+    ~DatabaseModel();
+    void insertDataStructure(DataStructure element);
+    void deleteDataStructure(DataStructure element);
+    QList<DataStructure> getAllDataFromTable();
 private:
-    QString p_name;
-    QString p_description;
+    void createTable();
+    QDir p_dbDir;
+    QString p_dbName;
+    QSqlDatabase p_db;
+    QSqlQuery p_sqlQuery;
 };
 //-------------------------------------------------------------------------------------------------
 } // namespace listandtextinput
 //-------------------------------------------------------------------------------------------------
-#endif // DATASTRUCTURE_H
+#endif // DATABASEMODEL_H

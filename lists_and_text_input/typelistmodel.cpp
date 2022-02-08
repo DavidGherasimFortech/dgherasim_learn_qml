@@ -48,18 +48,19 @@ QHash<int,QByteArray> TypeListModel::roleNames() const
     return mapping;
 }
 //-------------------------------------------------------------------------------------------------
-void TypeListModel::add(QString name, QString description)
+void TypeListModel::add(DataStructure element)
 {
-    p_types.push_back(DataStructure(name, description));
+    p_types.push_back(element);
 }
 //-------------------------------------------------------------------------------------------------
-void TypeListModel::deleteElement(QString name)
+void TypeListModel::deleteElement(DataStructure element)
 {
-    for(int i = 0; i < p_types.size(); i++)
+    for(int index = 0; index < p_types.size(); index++)
     {
-        if(p_types[i].name() == name )
+        if(p_types[index].name() == element.name() && p_types[index].description() == element.description())
         {
-            p_types.removeAt(i);
+            p_types.removeAt(index);
+            index -= 1;
         }
     }
 }

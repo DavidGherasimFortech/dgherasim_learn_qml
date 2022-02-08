@@ -23,8 +23,8 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
-    void add(QString name, QString description);
-    void deleteElement(QString name);
+    void add(DataStructure element);
+    void deleteElement(DataStructure element);
     DataStructure at(const int index);
     void update();
 private:

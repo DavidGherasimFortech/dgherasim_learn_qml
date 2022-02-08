@@ -1,43 +1,58 @@
 #include "typelistmodelmanager.h"
 #include "datastructure.h"
 #include "typelistmodel.h"
+#include "databasemodel.h"
 //-------------------------------------------------------------------------------------------------
 using namespace listandtextinput;
 //-------------------------------------------------------------------------------------------------
-TypeListModelManager::TypeListModelManager(QObject *parent) :
-    QObject(parent),
-    m_typeListModel(new TypeListModel)
+TypeListModelManager::TypeListModelManager() :
+    p_typeListModel(new TypeListModel),
+    p_databaseModel(new DatabaseModel("C:\\Users\\david.gherasim\\AppData\\Local\\lists_and_text_input", "list_model_onboarding.db"))
 {
-    Q_ASSERT(Q_NULLPTR != m_typeListModel);
+    Q_ASSERT(Q_NULLPTR != p_typeListModel);
+    Q_ASSERT(Q_NULLPTR != p_databaseModel);
+    QList<DataStructure> db_elements = p_databaseModel->getAllDataFromTable();
+    for(auto element : db_elements)
+    {
+        p_typeListModel->add(element);
+    }
 }
 //-------------------------------------------------------------------------------------------------
 TypeListModelManager::~TypeListModelManager()
 {
-    if(m_typeListModel != nullptr)
+    if(p_typeListModel != nullptr)
     {
-        delete(m_typeListModel);
+        delete(p_typeListModel);
+    }
+    if(p_databaseModel != nullptr)
+    {
+        delete(p_databaseModel);
     }
 }
 //-------------------------------------------------------------------------------------------------
 void TypeListModelManager::insertDataStructure(QString name, QString description)
 {
-    m_typeListModel->add(name, description);
+    DataStructure element(name, description);
+    p_typeListModel->add(element); // Insert into the memory structure
+    p_databaseModel->insertDataStructure(element); // Insert into the database table
     updateTypeListModel();
 }
 //-------------------------------------------------------------------------------------------------
-void TypeListModelManager::deleteDataStructure(QString name)
+void TypeListModelManager::deleteDataStructure(QString name, QString description)
 {
-    m_typeListModel->deleteElement(name);
+    DataStructure element(name, description);
+    p_typeListModel->deleteElement(element);
+    p_databaseModel->deleteDataStructure(element);
     updateTypeListModel();
 }
 //-------------------------------------------------------------------------------------------------
 void TypeListModelManager::updateTypeListModel()
 {
-    m_typeListModel->update();
+    p_typeListModel->update();
 }
 //-------------------------------------------------------------------------------------------------
 QAbstractListModel *TypeListModelManager::typeListModel() const
 {
-    return m_typeListModel;
+    return p_typeListModel;
 }
 //-------------------------------------------------------------------------------------------------

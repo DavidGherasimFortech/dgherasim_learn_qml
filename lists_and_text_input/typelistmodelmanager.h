@@ -5,6 +5,7 @@
 #include <QAbstractListModel>
 
 #include "typelistmodel.h"
+#include "databasemodel.h"
 //-------------------------------------------------------------------------------------------------
 namespace listandtextinput
 {
@@ -17,10 +18,10 @@ class TypeListModelManager : public QObject
     Q_OBJECT
     Q_PROPERTY(QAbstractListModel* typeListModel READ typeListModel CONSTANT)
 public:
-    explicit TypeListModelManager(QObject *parent = nullptr);
+    explicit TypeListModelManager();
     ~TypeListModelManager();
     Q_INVOKABLE void insertDataStructure(QString name, QString description);
-    Q_INVOKABLE void deleteDataStructure(QString name);
+    Q_INVOKABLE void deleteDataStructure(QString name, QString description);
     enum DataStructureRoles
     {
         NameRole = Qt::UserRole,
@@ -29,7 +30,8 @@ public:
     void updateTypeListModel();
     QAbstractListModel *typeListModel() const;
 private:
-    TypeListModel *m_typeListModel;
+    TypeListModel *p_typeListModel;
+    DatabaseModel *p_databaseModel;
 };
 //-------------------------------------------------------------------------------------------------
 } // namespace listandtextinput

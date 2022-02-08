@@ -120,7 +120,7 @@ Window {
                     leftMargin: 6
                 }
                 onClicked: {
-                    type_model.deleteDataStructure(newNamesInput.getText(0, 50))
+                    type_model.deleteDataStructure(newNamesInput.getText(0, 50), newDescInput.getText(0, 200))
                 }
             }
         }
